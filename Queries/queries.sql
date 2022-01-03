@@ -217,9 +217,24 @@ INNER JOIN departments as d
 ON (d.dept_no = de.dept_no)
 WHERE d.dept_name IN ('Sales', 'Development');
 
+-- determine the number of retiring employees per title and
+-- identify employees who are eligible to participate in a mentorship program.
 
+SELECT e.emp_no,
+	   e.first_name,
+	   e.last_name,
+	   ti.title,
+	   ti.from_date,
+	   ti.to_date
+INTO retirement_tables
+FROM employees AS e
+INNER JOIN titles AS ti
+ON (e.emp_no = ti.emp_no)
+WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+ORDER BY emp_no;
 
-
+SELECT *
+FROM retirement_tables;
 
 
 
