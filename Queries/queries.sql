@@ -225,6 +225,7 @@ SELECT e.emp_no,
 	   e.last_name,
 	   ti.title,
 	   ti.from_date,
+<<<<<<< HEAD
 	   ti.to_date
 INTO retirement_tables
 FROM employees AS e
@@ -235,6 +236,17 @@ ORDER BY emp_no;
 
 SELECT *
 FROM retirement_tables;
+=======
+	   ti.to_date,
+--INTO retirement_tables
+FROM employees AS e
+INNER JOIN titles AS ti
+ON (e.emp_no = t.emp_no)
+WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
+ORDER BY emp_no;
+
+
+>>>>>>> 6af08df0e77db0b2a3621b89861924720bf2f6e4
 
 
 
