@@ -225,7 +225,6 @@ SELECT e.emp_no,
 	   e.last_name,
 	   ti.title,
 	   ti.from_date,
-<<<<<<< HEAD
 	   ti.to_date
 INTO retirement_tables
 FROM employees AS e
@@ -236,17 +235,24 @@ ORDER BY emp_no;
 
 SELECT *
 FROM retirement_tables;
-=======
-	   ti.to_date,
---INTO retirement_tables
-FROM employees AS e
-INNER JOIN titles AS ti
-ON (e.emp_no = t.emp_no)
-WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
-ORDER BY emp_no;
 
+-- Use Dictinct with Orderby to remove duplicate rows
+SELECT DISTINCT ON (rt.emp_no) rt.emp_no,
+rt.first_name,
+rt.last_name,
+rt.title
 
->>>>>>> 6af08df0e77db0b2a3621b89861924720bf2f6e4
+INTO unique_titles
+FROM retirement_tables AS rt
+ORDER BY emp_no, to_date DESC;
 
+-- Call unique titles table columns.
+SELECT *
+FROM unique_title;
 
-
+-- Create table grouped by title of retirees and sorted by counts.
+SELECT COUNT (ut.title), ut.title
+INTO retiring_titles
+FROM unique_titles AS ut
+GROUP BY (ut.title)
+ORDER BY count DESC;
