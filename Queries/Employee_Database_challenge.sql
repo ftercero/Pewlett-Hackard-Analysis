@@ -39,6 +39,8 @@ FROM unique_titles AS ut
 GROUP BY (ut.title)
 ORDER BY count DESC;
 
+--Deliverable 2
+
 -- Create a mentorship eligibility table.
 -- Select columns
 SELECT DISTINCT ON (e.emp_no)
@@ -66,4 +68,4 @@ WHERE de.to_date = ('9999-01-01') AND
 -- Order by employee number
 ORDER BY emp_no;
 
-Deliverable 2
+-- Deliverable 3
