@@ -69,3 +69,53 @@ WHERE de.to_date = ('9999-01-01') AND
 ORDER BY emp_no;
 
 -- Deliverable 3
+--Group and count employees by birth year
+--Select emp_no and birth_date from employees and unique_titles
+SELECT ut.emp_no,
+	   e.birth_date
+--Create new table
+INTO emp_birth_date
+FROM unique_titles AS ut
+--Merge colums
+LEFT JOIN employees AS e
+ON e.emp_no=ut.emp_no;
+
+SELECT * FROM emp_birth_date;
+
+--Create table with only 1952 birth year
+SELECT COUNT (ebd.birth_date) AS year_1952
+INTO emp_1952
+FROM emp_birth_date AS ebd
+WHERE ebd.birth_date BETWEEN '1952-01-01' AND '1952-12-31';
+
+--Create table with only 1953 birth year
+SELECT COUNT (ebd.birth_date) AS year_1953
+INTO emp_1953
+FROM emp_birth_date AS ebd
+WHERE ebd.birth_date BETWEEN '1953-01-01' AND '1953-12-31';
+
+--Create table with only 1954 birth year
+SELECT COUNT (ebd.birth_date) AS year_1954
+INTO emp_1954
+FROM emp_birth_date AS ebd
+WHERE ebd.birth_date BETWEEN '1954-01-01' AND '1954-12-31';
+
+--Create table with only 1955 birth year
+SELECT COUNT (ebd.birth_date) AS year_1955
+INTO emp_1955
+FROM emp_birth_date AS ebd
+WHERE ebd.birth_date BETWEEN '1955-01-01' AND '1955-12-31';
+
+-- Create new table with the counts for every birth year
+CREATE TABLE employee_count AS
+SELECT  emp_1952.year_1952,
+		emp_1953.year_1953,
+		emp_1954.year_1954,
+		emp_1955.year_1955
+FROM emp_1952,
+	 emp_1953,
+	 emp_1954,
+	 emp_1955;
+	 
+SELECT * FROM employee_count;
+	  
